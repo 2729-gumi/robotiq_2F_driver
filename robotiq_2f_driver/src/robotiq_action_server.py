@@ -24,9 +24,10 @@ class RobotiqActionServer(object):
         else:
             raise Exception
         
-        self.start_activation()
-        rospy.loginfo("Robotiq activation started")
-        rospy.sleep(5)
+        #self.start_activation()
+        #rospy.loginfo("Robotiq activation started")
+        #rospy.sleep(5)
+        #self.set_speed(255)
         
         self._action_server.start()
         rospy.loginfo("Robotiq server started")
@@ -53,7 +54,12 @@ class RobotiqActionServer(object):
         self.send_command("SET ACT 1\n")
 
     def set_pos(self, pos):
+        rospy.loginfo("Robotiq: SET POS {}".format(pos))
         self.send_command("SET POS {}\n".format(pos))
+    
+    def set_speed(self, speed):
+        rospy.loginfo("Robotiq: SET SPE {}".format(speed))
+        self.send_command("SET SPE {}\n".format(speed))
     
     def execute_cb(self, goal):
         
